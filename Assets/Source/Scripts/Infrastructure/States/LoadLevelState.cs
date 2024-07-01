@@ -47,11 +47,11 @@ public class LoadLevelState : IPayloadedState<string>
 
     private void InitGameWorld()
     {
-        GameObject player = _gameFactory.CreatePlayer(GameObject.FindFirstObjectByType<InitialPoint>());
+        GameObject player = _gameFactory.CreatePlayer(Object.FindFirstObjectByType<InitialPoint>());
 
         GameObject HUD = _gameFactory.CreateUI();
 
-        HUD.GetComponentInChildren<ActorUI>().Initialize(player.GetComponent<PlayerHealth>());
+        HUD.GetComponent<ActorUI>().Construct(player.GetComponent<IHealth>());
 
         CameraFollow(player);
     }

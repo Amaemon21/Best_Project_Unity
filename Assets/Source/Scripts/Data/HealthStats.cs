@@ -1,7 +1,7 @@
 ﻿ using System;
 
 [Serializable]
-public class State
+public class HealthStats
 {
     public float CurrentHealth;
     public float MaxHealth;

@@ -31,8 +31,12 @@
     {
         PlayerProgress playerProgress  = new PlayerProgress("Gameplay");
 
-        playerProgress.PlayerState.MaxHealth = 50;
-        playerProgress.PlayerState.ResetHealth();
+        playerProgress.HealthStats.MaxHealth = 50;
+        playerProgress.HealthStats.ResetHealth();
+
+        playerProgress.DamageStats.Damage = 100;
+        playerProgress.DamageStats.Radius = 0.5f;
+
 
         return playerProgress;
     }

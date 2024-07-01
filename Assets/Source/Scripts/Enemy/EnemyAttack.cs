@@ -26,7 +26,6 @@ public class EnemyAttack : MonoBehaviour
     private float _cooldown;
     private int _layerMask;
 
-
     private void OnValidate()
     {
         _enemyAnimator ??= GetComponent<EnemyAnimator>();
@@ -73,7 +72,7 @@ public class EnemyAttack : MonoBehaviour
         if (Hit(out Collider hit))
         {
             //PhysicsDebug.DrawDebug(StartPoint(), _cleavage, 1);
-            hit.transform.GetComponent<PlayerHealth>().TakeDamage(_damage);
+            hit.transform.GetComponent<IHealth>().TakeDamage(_damage);
         }
     }
 

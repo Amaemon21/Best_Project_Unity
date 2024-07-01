@@ -6,12 +6,12 @@ public class GameFactory : IGameFactory
 {
     private readonly IAssetProvider _assets;
 
-    public event Action PlayerCreated;
-
     public List<ISavedProgressReader> ProgressReaders { get; } = new();
     public List<ISavedProgress> ProgressWriters { get; } = new();
 
     public GameObject PlayerGameObject { get; set; }
+
+    public event Action PlayerCreated;
 
     public GameFactory(IAssetProvider assets)
     {

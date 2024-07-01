@@ -4,22 +4,26 @@ public class ActorUI : MonoBehaviour
 { 
     [SerializeField] private HealthBar _healthBar;
 
-    private PlayerHealth _playerHealth;
+    private IHealth _health;
 
-    public void Initialize(PlayerHealth playerHealth )
+    public void Construct(IHealth health)
     {
-        _playerHealth = playerHealth;
-
-        _playerHealth.HealthChanged += UpdateUI;
+        _health = health;
+        _health.HealthChanged += UpdateUI;
     }
 
-    private void OnDisable()
+    private void Start()
     {
-        _playerHealth.HealthChanged -= UpdateUI;
+        IHealth health = GetComponent<EnemyHealth>();
+
+        if (health != null)
+            Construct(health);
     }
+
+    private void OnEnable() => _health.HealthChanged -= UpdateUI;
 
     private void UpdateUI()
     {
-        _healthBar.UpdateValue(_playerHealth.CurrentHealth, _playerHealth.MaxHealth);
+        _healthBar.UpdateValue(_health.Current, _health.Max);
     }
 }

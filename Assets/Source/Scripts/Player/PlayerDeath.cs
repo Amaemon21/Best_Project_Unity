@@ -1,14 +1,15 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerAnimator))]
 [RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(PlayerHealth))]
+[RequireComponent(typeof(PlayerAttack))]
 public class PlayerDeath : MonoBehaviour
 {
     [HideInInspector] [SerializeField] private PlayerAnimator _playerAnimator;
     [HideInInspector] [SerializeField] private PlayerMove _playerMove;
     [HideInInspector] [SerializeField] private PlayerHealth _playerHealth;
+    [HideInInspector] [SerializeField] private PlayerAttack _playerAttack;
 
     [SerializeField] private GameObject _DeathFX;
     private bool _isDead;
@@ -16,8 +17,9 @@ public class PlayerDeath : MonoBehaviour
     private void OnValidate()
     {
         _playerAnimator ??= GetComponent<PlayerAnimator>();
-        _playerMove = GetComponent<PlayerMove>();
-        _playerHealth = GetComponent<PlayerHealth>();
+        _playerMove ??= GetComponent<PlayerMove>();
+        _playerHealth ??= GetComponent<PlayerHealth>();
+        _playerAttack ??= GetComponent<PlayerAttack>();
     }
 
     private void OnEnable()
@@ -32,7 +34,7 @@ public class PlayerDeath : MonoBehaviour
 
     private void OnHealthChanged()
     {
-        if (!_isDead && _playerHealth.CurrentHealth <= 0)
+        if (!_isDead && _playerHealth.Current <= 0)
             Die();
     }
 
@@ -41,7 +43,9 @@ public class PlayerDeath : MonoBehaviour
         _isDead = true;
 
         _playerMove.enabled = false;
-        _playerAnimator.PlayDeath(); 
+        _playerAttack.enabled = false;
+
+        _playerAnimator.PlayDeath();
 
         Instantiate(_DeathFX, transform.position, Quaternion.identity);
     }

@@ -4,11 +4,13 @@ using System;
 public class PlayerProgress
 {
     public WorldData WorldData;
-    public State PlayerState;
+    public HealthStats HealthStats;
+    public DamageStats DamageStats;
 
     public PlayerProgress(string initialLevel)
     {
         WorldData = new WorldData(initialLevel);
-        PlayerState = new State();
+        HealthStats = new HealthStats();
+        DamageStats = new DamageStats();
     }
 }

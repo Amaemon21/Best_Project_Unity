@@ -2,27 +2,30 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerAnimator))]
-public class PlayerHealth : MonoBehaviour, ISavedProgress
+public class PlayerHealth : MonoBehaviour, ISavedProgress, IHealth
 {
-    [HideInInspector] [SerializeField] private PlayerAnimator _playerAnimator;
+    [HideInInspector][SerializeField] private PlayerAnimator _playerAnimator;
 
-    private State _state;
+    private HealthStats _state;
     private ISaveLoadSerivce _saveLoadServer;
 
-    public event Action HealthChanged; 
+    public event Action HealthChanged;
 
-    public float CurrentHealth
+    public float Current
     {
         get => _state.CurrentHealth;
-        private set => _state.CurrentHealth = value;
+        private set
+        {
+            _state.CurrentHealth = value;
+            HealthChanged?.Invoke();
+        }
     }
 
-    public float MaxHealth
+    public float Max
     {
         get => _state.MaxHealth;
         private set => _state.MaxHealth = value;
     }
-
 
     private void OnValidate()
     {
@@ -36,28 +39,23 @@ public class PlayerHealth : MonoBehaviour, ISavedProgress
 
     public void LoadProgress(PlayerProgress proggress)
     {
-        _state = proggress.PlayerState;
+        _state = proggress.HealthStats;
         HealthChanged?.Invoke();
     }
 
     public void UpdateProgress(PlayerProgress proggress)
     {
-        proggress.PlayerState.CurrentHealth = CurrentHealth;
-        proggress.PlayerState.MaxHealth = MaxHealth;
+        proggress.HealthStats.CurrentHealth = Current;
+        proggress.HealthStats.MaxHealth = Max;
     }
 
     public void TakeDamage(float damage)
     {
-        if (damage < 0) 
-            return;
-
-        if (CurrentHealth <= 0)
-            return;
-
-        CurrentHealth -= damage;
+        HealthChanged?.Invoke();
 
         _saveLoadServer.SaveProggress();
-        HealthChanged?.Invoke();
+
+        Current -= damage;
 
         _playerAnimator.PlayHit();
     }

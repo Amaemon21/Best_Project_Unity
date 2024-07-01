@@ -3,12 +3,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [HideInInspector] [SerializeField] private Image _image;
-
-    private void OnValidate()
-    {
-        _image ??= GetComponent<Image>();
-    }
+    [SerializeField] private Image _image;
 
     public void UpdateValue(float currentHealth, float maxHealth)
     {

@@ -16,7 +16,7 @@ public class PlayerAnimator : MonoBehaviour
 
     #region AnimatorHashes
     private static readonly int MoveHash = Animator.StringToHash("Moving");
-    private static readonly int AttackHash = Animator.StringToHash("AttackNormal");
+    private static readonly int AttackHash = Animator.StringToHash("Attack");
     private static readonly int HitHash = Animator.StringToHash("Hit");
     private static readonly int DieHash = Animator.StringToHash("Die");
 
