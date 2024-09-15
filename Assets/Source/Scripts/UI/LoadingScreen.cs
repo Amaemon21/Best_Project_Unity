@@ -7,13 +7,6 @@ public class LoadingScreen : MonoBehaviour
 
     private readonly float _speedFade = 0.03f;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(this);
-
-        Hide();
-    }
-
     public void Show()
     {
         gameObject.SetActive(true);

@@ -29,7 +29,7 @@
 
     private PlayerProgress NewProggress()
     {
-        PlayerProgress playerProgress  = new PlayerProgress("Gameplay");
+        PlayerProgress playerProgress = new PlayerProgress("Gameplay");
 
         playerProgress.HealthStats.MaxHealth = 50;
         playerProgress.HealthStats.ResetHealth();

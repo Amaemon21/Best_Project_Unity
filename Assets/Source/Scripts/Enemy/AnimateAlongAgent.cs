@@ -5,7 +5,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(EnemyAnimator))]
 public class AnimateAlongAgent : MonoBehaviour
 {
-    private readonly float _minimalVelocity = 0.1f ;
+    private readonly float _minimalVelocity = 0.1f;
 
     [HideInInspector] [SerializeField] private NavMeshAgent _agent;
     [HideInInspector] [SerializeField] private EnemyAnimator _enemyAnimator;

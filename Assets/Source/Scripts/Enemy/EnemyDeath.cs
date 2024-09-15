@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyHealth))]
@@ -10,15 +9,19 @@ public class EnemyDeath : MonoBehaviour
 
     [HideInInspector][SerializeField] private EnemyHealth _enemyHealth;
     [HideInInspector][SerializeField] private EnemyAnimator _enemyAnimator;
+    [HideInInspector][SerializeField] private AgentMoveToPlayer _agentMoveToPlayer;
+    [HideInInspector][SerializeField] private RotateToPlayer _rotateToPlayer;
 
     [SerializeField] private GameObject _deathFX;
 
-    public event Action Happend;
+    public event Action HappendChanged;
 
     private void OnValidate()
     {
         _enemyHealth ??= GetComponent<EnemyHealth>();
         _enemyAnimator ??= GetComponent<EnemyAnimator>();
+        _agentMoveToPlayer ??= GetComponent<AgentMoveToPlayer>();
+        _rotateToPlayer ??= GetComponent<RotateToPlayer>();
     }
 
     private void OnEnable() => _enemyHealth.HealthChanged += OnHealthChanged;
@@ -28,31 +31,30 @@ public class EnemyDeath : MonoBehaviour
     private void OnHealthChanged()
     {
         if (_enemyHealth.Current <= 0)
-            Die();
+            DieEnemy();
     }
 
-    private void Die()
+    private void DieEnemy()
     {
-        _enemyHealth.HealthChanged -= OnHealthChanged;
-
         _enemyAnimator.PlayDeath();
+
+        DisableComponent();
 
         SpawmDeathFX();
 
-        StartCoroutine(DestroyTimer());
+        Destroy(gameObject, _timeDestory);
 
-        Happend?.Invoke();
-    }
-
-
-    private IEnumerator DestroyTimer()
-    {
-        yield return new WaitForSeconds(_timeDestory);
-        Destroy(gameObject);
+        HappendChanged?.Invoke();
     }
 
     private void SpawmDeathFX()
     {
         Instantiate(_deathFX, transform.position, Quaternion.identity);
+    }
+
+    private void DisableComponent()
+    {
+        _agentMoveToPlayer.enabled = false;
+        _rotateToPlayer.enabled = false;
     }
 }
