@@ -53,7 +53,7 @@ public class PlayerHealth : MonoBehaviour, ISavedProgress, IHealth
     {
         HealthChanged?.Invoke();
 
-        _saveLoadServer.SaveProggress();
+        _saveLoadServer.SaveProgress();
 
         Current -= damage;
 

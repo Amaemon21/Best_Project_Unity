@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,7 +6,7 @@ public class AgentMoveToPlayer : Follow
 {
     private const float _minimalDistance = 1;
 
-    [HideInInspector] [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private NavMeshAgent _agent;
 
     private Transform _target;
     private IGameFactory _gameFactory;
@@ -15,17 +16,20 @@ public class AgentMoveToPlayer : Follow
         _agent ??= GetComponent<NavMeshAgent>();
     }
 
-    private void Start()
+    private void Awake()
     {
         _gameFactory = AllServices.Container.Single<IGameFactory>();
+    }
 
+    private void OnEnable()
+    {
         if (_gameFactory.PlayerGameObject != null)  
             InitializeTargetTransform();
         else
             _gameFactory.PlayerCreated += OnPlayerCreated;
     }
 
-    private void OnEnable()
+    private void OnDisable()
     {
         if (_gameFactory != null)
             _gameFactory.PlayerCreated -= OnPlayerCreated;
@@ -49,7 +53,19 @@ public class AgentMoveToPlayer : Follow
         _target = _gameFactory.PlayerGameObject.transform;
     }
 
-    private bool IsTargetNotReched() => _agent.transform.position.SqrMagnitudeTo(_target.position) >= _minimalDistance;
+    private bool IsTargetNotReched()
+    {
+        return _agent.transform.position.SqrMagnitudeTo(_target.position) >= _minimalDistance;
+    }
 
-    private bool TryInitialized() => _target != null;
+    private bool TryInitialized()
+    {
+        if (_target == null)
+        {
+            Debug.LogWarning("TargetNull");
+            return false;
+        }
+        
+        return true;
+    }
 }

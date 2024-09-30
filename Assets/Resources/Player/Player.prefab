@@ -506,6 +506,7 @@ CharacterController:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -539,22 +540,28 @@ BoxCollider:
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!95 &695945817422099944
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3584201745967459581}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: b7643d2f664af784e8d3e7188fd340e7, type: 3}
   m_Controller: {fileID: 9100000, guid: b6b7d8f2679bef84d835a5dae157de26, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'bip_pelvis'\n\tTransform 'wp_R'\n\tTransform
+    'wp_L'\n\tTransform 'bip_hip_L'\n\tTransform 'bip_pelvis'\n\tTransform 'bip_spine_2'\n\tTransform
+    'bip_upperArm_R'\n\tTransform 'bip_finger_R6'\n\tTransform 'bip_finger_L6'\n\tTransform
+    'bip_spine_0'\n\tand more ...\n\tFrom animation clip 'Paladin_Death'\n\tFrom
+    animation clip 'Paladin_Idle'\n\tFrom animation clip 'Paladin_Idle_long'\n\tFrom
+    animation clip 'Paladin_Walk'\n\tFrom animation clip 'Paladin_Damage'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -917,9 +924,6 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

@@ -1,5 +1,5 @@
 ﻿public interface ISaveLoadSerivce : IService
 {
-    public void SaveProggress();
-    public PlayerProgress LoadProggress();
+    public void SaveProgress();
+    public PlayerProgress LoadProgress();
 }

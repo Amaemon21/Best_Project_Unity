@@ -22,7 +22,7 @@ public class SaveTrigger : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerMove>(out PlayerMove player))
         {
-            _saveLoadServer.SaveProggress();
+            _saveLoadServer.SaveProgress();
             Debug.Log("Save progress");
             gameObject.SetActive(false);
         }          

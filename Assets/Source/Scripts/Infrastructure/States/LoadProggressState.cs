@@ -24,7 +24,7 @@
 
     private void LoadProggressOrInitNew()
     {
-        _proggressService.PlayerProgress = _saveLoadService.LoadProggress() ?? NewProggress();
+        _proggressService.PlayerProgress = _saveLoadService.LoadProgress() ?? NewProggress();
     }
 
     private PlayerProgress NewProggress()

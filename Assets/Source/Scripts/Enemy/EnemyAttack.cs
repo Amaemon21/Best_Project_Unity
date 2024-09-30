@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyAnimator))]
 public class EnemyAttack : MonoBehaviour
 {
-    [HideInInspector] [SerializeField] private EnemyAnimator _enemyAnimator;
+    [SerializeField] private EnemyAnimator _enemyAnimator;
 
     [SerializeField] private float _attackCooldown = 3f;
     [SerializeField] private float _cleavage = 5f;
@@ -71,7 +71,6 @@ public class EnemyAttack : MonoBehaviour
     {
         if (Hit(out Collider hit))
         {
-            //PhysicsDebug.DrawDebug(StartPoint(), _cleavage, 1);
             hit.transform.GetComponent<IHealth>().TakeDamage(_damage);
         }
     }
@@ -79,6 +78,7 @@ public class EnemyAttack : MonoBehaviour
     private void OnAttackEnded()
     {
         _cooldown = _attackCooldown;
+        
         _isAttacking = false;
     }
 

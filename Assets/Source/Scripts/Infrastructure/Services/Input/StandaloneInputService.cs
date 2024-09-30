@@ -17,6 +17,6 @@ public class StandaloneInputService : InputService
 
     public override bool IsAttackButton()
     {
-        return Input.GetButtonUp(Fire1);
+        return Input.GetButtonUp("Jump");
     }
 }

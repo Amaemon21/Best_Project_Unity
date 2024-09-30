@@ -2,7 +2,7 @@
 
 public class BootstrapState : IState
 {
-    private const string Initial = "Initial";
+    private const string Initial = "Boot";
     private const string Gameplay = "Gameplay";
 
     private readonly GameStateMachine _stateMachine;
@@ -38,7 +38,7 @@ public class BootstrapState : IState
         _services.RegisterSingle<IAssetProvider>(new AssetProvider());
         _services.RegisterSingle<IPersistentProggressService>(new PersistentProggressService());
         _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>()));
-        _services.RegisterSingle<ISaveLoadSerivce>(new SaveLoadSerivce(_services.Single<IPersistentProggressService>(), _services.Single<IGameFactory>()));
+        _services.RegisterSingle<ISaveLoadSerivce>(new SaveLoadService(_services.Single<IPersistentProggressService>(), _services.Single<IGameFactory>()));
     }
 
     private static IInputService InputService()

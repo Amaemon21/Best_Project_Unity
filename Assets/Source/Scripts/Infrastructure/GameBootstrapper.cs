@@ -8,7 +8,7 @@ public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
 
     private void Awake()
     {
-        LoadingScreen loadingScreen = Instantiate(_loadingScreen);
+        LoadingScreen loadingScreen = Instantiate(_loadingScreen, transform);
 
         _game = new Game(this, loadingScreen);
         _game.StateMachine.Enter<BootstrapState>();
